@@ -37,7 +37,7 @@ public class Booking implements Serializable {
     {
         this.member = builder.member;
         //this.schedule = builder.schedule;
-        this.id = builder.id;
+        //this.id = builder.id;
         this.avail = builder.avail;
         
     }
