@@ -6,8 +6,9 @@
 
 package repository;
 
-import app.ConnectionConfig;
-import domain.Account;
+import com.joseph.gymWeb.repository.AccountRepo;
+import com.joseph.gymWeb.app.ConnectionConfig;
+import com.joseph.gymWeb.domain.Account;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.testng.Assert;
@@ -36,14 +37,16 @@ public class AccountRepoTest {
      public void createAccount() 
      {
          repo = ctx.getBean(AccountRepo.class);
-         Account account = new Account.Builder("holder1").
+         Account account = new Account.Builder("holder1").accountHolder("some").
                  amountDue(123.34).
                  build();
          
             repo.save(account);
          id = account.getId();
-         Assert.assertNotNull(id);
+         Assert.assertNotNull(account);
      }
+     
+     
 
     @BeforeClass
     public static void setUpClass() throws Exception {

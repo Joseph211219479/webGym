@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package domain;
+package com.joseph.gymWeb.domain;
 
 import java.util.Objects;
 import javax.persistence.Embeddable;

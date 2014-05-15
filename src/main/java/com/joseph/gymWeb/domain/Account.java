@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package domain;
+package com.joseph.gymWeb.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -23,18 +23,18 @@ public class Account implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String accountId;
     private String accountHolder;
     private double amountDue;
     
+    private Account() {
+    }
     private Account(Builder build)
     {
         this.id             =  build.id;
         this.accountHolder  =  build.accountHolder;
         this.amountDue      =  build.amountDue;
-                        
-    }
-    
-    private Account() {
+        this.accountId      =  build.accountId;                
     }
     
     public static class Builder
@@ -42,11 +42,18 @@ public class Account implements Serializable{
            private Long id;
            private String accountHolder;
            private double amountDue;
+           private String accountId;
            
-           public Builder (String accountHolder)
+           public Builder (String accountId)
+           {
+               this.accountId = accountId;
+           }
+           
+         public Builder accountHolder(String accountHolder)
            {
                this.accountHolder = accountHolder;
-           }
+               return this;
+           }   
         public Builder id(Long id)
         {
             this.id = id;
@@ -65,6 +72,10 @@ public class Account implements Serializable{
         {
             return new Account(this);
         }
+    }
+
+    public String getAccountId() {
+        return accountId;
     }
 
     public Long getId() {

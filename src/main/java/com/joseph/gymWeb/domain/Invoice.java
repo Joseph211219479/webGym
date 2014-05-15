@@ -4,10 +4,11 @@
  * and open the template in the editor.
  */
 
-package domain;
+package com.joseph.gymWeb.domain;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -27,14 +28,14 @@ public class Invoice implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+    private String invoiceID;
     private double total;
     @Embedded
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany//(cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id")
     List<Product> product;
 
-    public Invoice() {
+    private Invoice() {
     }
     
     private Invoice(Build build)
@@ -61,10 +62,16 @@ public class Invoice implements Serializable{
         private double total;
         private List<Product> product;
         private Long id;
+        private String invoiceID;
         
-        public Build(Long id)
+        public Build(String invoiceID)
+        {
+            this.invoiceID = invoiceID;
+        }
+        public Build id(Long id)
         {
             this.id = id;
+            return this;
         }
         public Build total(double total)
         {
@@ -83,9 +90,35 @@ public class Invoice implements Serializable{
        
     }
 
+    public String getInvoiceID() {
+        return invoiceID;
+    }
+
     @Override
     public String toString() {
         return "Invoice{" + "id=" + id + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Invoice other = (Invoice) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
     
 }

@@ -4,17 +4,20 @@
  * and open the template in the editor.
  */
 
-package domain;
+package com.joseph.gymWeb.domain;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -26,22 +29,26 @@ public class Maintenance implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "person_id")
-    List<Equipment> equipment ;
+    
+    @Embedded
+    private List<Equipment> equipment ;
+    
     private String nextDate;
     private double costs;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "person_id")
-    List<Staff> staff;
+     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "maintenance_id")
+    private List<Staff> staff;
+    private String buildID;
     
-    public Maintenance(){}
+    private Maintenance(){}
+    
     private Maintenance(Builder build)
     {
-        this.costs = build.costs;
-        this.nextDate = build.date;
-        this.staff = build.staff;
-        this.equipment = build.equipment;
+        this.costs      = build.costs;
+        this.nextDate   = build.date;
+        this.staff      = build.staff;
+        this.equipment  = build.equipment;
+        this.buildID = build.buildID;
     }
     
     public static class Builder
@@ -51,10 +58,16 @@ public class Maintenance implements Serializable{
         private double costs;
         private List<Staff> staff;
         private Long id;
+        private String buildID;
         
-        public Builder (Long id)
+        public Builder (String buildID)
+        {
+            this.buildID = buildID;
+        }
+        public Builder id(Long id)
         {
             this.id = id;
+            return this;
         }
         public Builder date(String date)
         {
@@ -101,6 +114,32 @@ public class Maintenance implements Serializable{
 
     public List<Staff> getStaff() {
         return staff;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 43 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    public String getBuildID() {
+        return buildID;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Maintenance other = (Maintenance) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
 
     @Override

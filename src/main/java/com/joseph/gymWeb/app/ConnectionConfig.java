@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package app;
+package com.joseph.gymWeb.app;
 
 /**
  *
@@ -13,6 +13,7 @@ package app;
 import javax.sql.DataSource;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -20,6 +21,7 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -28,8 +30,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @author boniface
  */
 @Configuration
+@ComponentScan("com.joseph.gymWeb")
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "WebGym.repository")
+@EnableJpaRepositories(basePackages = "com.joseph.gymWeb.repository")
 public class ConnectionConfig {
 
     @Bean
@@ -48,7 +51,7 @@ public class ConnectionConfig {
         LocalContainerEntityManagerFactoryBean lef = new LocalContainerEntityManagerFactoryBean();
         lef.setDataSource(dataSource);
         lef.setJpaVendorAdapter(jpaVendorAdapter);
-        lef.setPackagesToScan("WebGym.domain");
+        lef.setPackagesToScan("com.joseph.gymWeb.domain");
         return lef;
     }
 

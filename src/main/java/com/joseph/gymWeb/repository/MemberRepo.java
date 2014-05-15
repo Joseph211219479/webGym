@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 
-package repository;
+package com.joseph.gymWeb.repository;
 
-import domain.Account;
+import com.joseph.gymWeb.domain.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  *
  * @author Common Sense
  */
-//@Repository
-public interface AccountRepo extends JpaRepository <Account,Long> {
+@Repository
+public interface MemberRepo extends JpaRepository <Member, Long>{
     
 }

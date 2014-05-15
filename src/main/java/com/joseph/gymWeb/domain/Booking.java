@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package domain;
+package com.joseph.gymWeb.domain;
 
 import java.io.Serializable;
 import java.util.List;
@@ -29,7 +29,7 @@ public class Booking implements Serializable {
     private Long id;
     @Embedded
     private Contack contact;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany //cascade
     List<Member> member;
     private int avail;
     

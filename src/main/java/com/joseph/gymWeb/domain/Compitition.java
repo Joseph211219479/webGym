@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package domain;
+package com.joseph.gymWeb.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -95,6 +95,11 @@ public class Compitition implements Serializable {
         {
             return new Compitition(this);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Compitition{" + "id=" + id + '}';
     }
 
     

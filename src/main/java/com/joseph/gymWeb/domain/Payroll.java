@@ -4,15 +4,18 @@
  * and open the template in the editor.
  */
 
-package domain;
+package com.joseph.gymWeb.domain;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -27,7 +30,9 @@ public class Payroll implements Serializable {
     
      private int staffId;
     private double amount;
-    private List<Staff> staff;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "payroll_id")
+    private Staff staff;
     
     private Payroll()
     {}
@@ -44,7 +49,7 @@ public class Payroll implements Serializable {
     {
         private int staffId;
         private double amount;
-        private List<Staff> staff;
+        private Staff staff;
         private Long id;
         
         public Builder( double amount )
@@ -63,7 +68,7 @@ public class Payroll implements Serializable {
             return this;
         }
         
-        public Builder staff( List<Staff> values )
+        public Builder staff( Staff values )
         {
             staff = values;
             return this;
@@ -83,7 +88,7 @@ public class Payroll implements Serializable {
         return amount;
     }
 
-    public List<Staff> getStaff() {
+    public Staff getStaff() {
         return staff;
     }
 
