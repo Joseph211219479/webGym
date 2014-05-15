@@ -66,6 +66,16 @@ public class Account implements Serializable{
             this.amountDue = amountDue;
             return this;
         }
+        
+        public Builder account(Account a)
+        {
+            accountId = a.getAccountId();
+            amountDue = a.getAmountDue();
+            accountHolder = a.getAccountHolder();
+            id = a.getId();
+            
+            return this;
+        }
        
         
         public Account build()

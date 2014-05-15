@@ -7,6 +7,7 @@
 package com.joseph.gymWeb.domain;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,6 +26,7 @@ public class Ads implements Serializable {
     private Long id;
     private String startdate;
     private String endDate;
+    private String adsID;
     
     private Ads(){}
     private Ads(Build build)
@@ -32,6 +34,7 @@ public class Ads implements Serializable {
         this.endDate = build.endDate;
         this.startdate = build.startdate;
         this.id = build.id;
+        this.adsID = build.adsID;
     }
     
     public static class Build
@@ -39,10 +42,16 @@ public class Ads implements Serializable {
         private Long id;
         private String startdate;
         private String endDate;
+        private String adsID;
     
-        public Build(Long id)
+        public Build(String adsID)
+        {
+            this.adsID = adsID;
+        }
+        public Build id(Long id)
         {
             this.id = id;
+            return this;
         }
         public Build startdate(String startdate)
         {
@@ -72,9 +81,36 @@ public class Ads implements Serializable {
         return endDate;
     }
 
+    public String getAdsID() {
+        return adsID;
+    }
+    
+
     @Override
     public String toString() {
         return "Ads{" + "id=" + id + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Ads other = (Ads) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
     
     

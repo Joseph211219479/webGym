@@ -47,6 +47,31 @@ public class AccountRepoTest {
      }
      
      
+     @Test(dependsOnMethods = "createAccount")
+     public void read()
+     {
+         repo = ctx.getBean(AccountRepo.class);
+         Account account = repo.findOne(id);
+         
+         Assert.assertEquals(account.getAccountHolder(), "some");
+     }
+     
+     @Test(dependsOnMethods = "read")
+     public void update()
+     {
+         repo = ctx.getBean(AccountRepo.class);
+         Account account = repo.findOne(id);
+         Account updateAccount = new Account.Builder("holder1")
+                 .account(account)
+                 .accountHolder("Joseph")
+                 .build();
+         
+         repo.save(updateAccount);
+         Account newAccount = repo.findOne(id);
+         Assert.assertEquals(newAccount.getAccountHolder(), "Joseph");
+     }
+     
+     
 
     @BeforeClass
     public static void setUpClass() throws Exception {
