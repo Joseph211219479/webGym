@@ -91,6 +91,16 @@ public class Compitition implements Serializable {
             this.date = date;
             return this;
         }
+        public Build compitition(Compitition compitition)
+        {
+              this.name     = compitition.getName();
+              this.date     = compitition.getDate();
+                this.prize  = compitition.getPrize();
+                this.compid = compitition.getCompid();
+                this.id     = compitition.getId();
+            
+            return this;
+        }
         public Compitition build()
         {
             return new Compitition(this);

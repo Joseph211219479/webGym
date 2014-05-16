@@ -15,6 +15,6 @@ import org.springframework.stereotype.Repository;
  * @author Common Sense
  */
 @Repository
-public interface MemberRepo extends JpaRepository <Member, Long>{
+public interface MemberRepo extends JpaRepository<Member, Long>{
     
 }

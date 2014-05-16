@@ -35,7 +35,7 @@ public class Member implements Serializable{
     private String lastname;
    // private Account acount ;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "member_id")
     private Account accounts;
     private String memId;
     
@@ -69,6 +69,17 @@ public class Member implements Serializable{
             this.id = id;
             return this;
         }
+        public Builder member(Member member)
+        {
+            this.accounts = member.getAccounts();
+            this.firstname= member.getFirstname();
+            this.id       = member.getId();
+            this.lastname= member.getLastname();
+            this.memId  =member.getMemId();
+            
+            return this;
+        }
+        
         public Builder account(Account accounts)
         {
             this.accounts = accounts;

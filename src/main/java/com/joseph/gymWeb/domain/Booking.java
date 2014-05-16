@@ -27,10 +27,13 @@ public class Booking implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
     @Embedded
     private Contack contact;
-    @OneToMany //cascade
+    
+    @OneToMany(cascade = CascadeType.ALL)
     List<Member> member;
+    
     private int avail;
     private String bookingId;
     
@@ -40,6 +43,9 @@ public class Booking implements Serializable {
         //this.schedule = builder.schedule;
         //this.id = builder.id;
         this.avail = builder.avail;
+        this.bookingId = builder.bookingId;
+        this.id = builder.id;
+        
         
     }
     

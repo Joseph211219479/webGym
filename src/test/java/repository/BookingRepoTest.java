@@ -55,6 +55,8 @@ public class BookingRepoTest {
                  account(account1).
                  build();
          
+         memberList.add(member1);
+         
          Booking booking = new Booking.Builder("12345").
                  avail(5).
                  member(memberList).
@@ -66,7 +68,40 @@ public class BookingRepoTest {
          
          
      }
+     
+     @Test(dependsOnMethods = "create")
+     public void read()
+     {
+         repo = ctx.getBean(BookingRepo.class);
+         Booking booking = repo.findOne(id);
+         
+         Assert.assertEquals(booking.getBookingId(), "12345");
+     }
+     @Test(dependsOnMethods ="read" )
+     public void update()
+     {
+         repo = ctx.getBean(BookingRepo.class);
+         Booking booking = repo.findOne(id);
+         Booking updateBook = new Booking.Builder("12345").
+                 booking(booking).
+                 avail(2).
+                 builder();
+         
+         repo.save(updateBook);
+         Booking newBooking = repo.findOne(id);
+         Assert.assertEquals(newBooking.getAvail(), 2);
+     }
 
+     @Test(dependsOnMethods = "update")
+     public void delete()
+     {
+         repo = ctx.getBean(BookingRepo.class);
+         Booking booking = repo.findOne(id);
+         repo.delete(booking);
+         
+         Booking deletedooking = repo.findOne(id);
+         Assert.assertNull(deletedooking);
+     }
     @BeforeClass
     public static void setUpClass() throws Exception {
         ctx = new AnnotationConfigApplicationContext(ConnectionConfig.class);

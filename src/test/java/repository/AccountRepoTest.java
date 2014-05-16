@@ -63,7 +63,7 @@ public class AccountRepoTest {
          Account account = repo.findOne(id);
          Account updateAccount = new Account.Builder("holder1")
                  .account(account)
-                 .amountDue(100.54)
+                 //.amountDue(100.54)
                  .accountHolder("Joseph")
                  .build();
          
