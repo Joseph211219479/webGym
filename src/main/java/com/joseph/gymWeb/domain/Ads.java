@@ -63,6 +63,15 @@ public class Ads implements Serializable {
             this.endDate = endDate;
             return this;
         }
+        public Build ads(Ads ads)
+        {
+            id = ads.getId();
+            startdate = ads.getStartdate();
+            endDate = ads.getStartdate();
+            adsID = ads.getAdsID();
+            
+            return this;
+        }
         public Ads build()
         {
             return new Ads(this);

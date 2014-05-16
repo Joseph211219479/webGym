@@ -63,6 +63,7 @@ public class AccountRepoTest {
          Account account = repo.findOne(id);
          Account updateAccount = new Account.Builder("holder1")
                  .account(account)
+                 .amountDue(100.54)
                  .accountHolder("Joseph")
                  .build();
          
@@ -71,6 +72,16 @@ public class AccountRepoTest {
          Assert.assertEquals(newAccount.getAccountHolder(), "Joseph");
      }
      
+     @Test(dependsOnMethods = "update")
+     public void delete()
+     {
+         repo = ctx.getBean(AccountRepo.class);
+         Account account = repo.findOne(id);
+         repo.delete(account);
+         
+         Account deletedAccount = repo.findOne(id);
+         Assert.assertNull(deletedAccount);
+     }
      
 
     @BeforeClass

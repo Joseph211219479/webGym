@@ -44,7 +44,43 @@ public class AdsRepoTest {
          
          repo.save(ads);
          id = ads.getId();
-         Assert.assertNotNull(id);
+         Assert.assertNotNull(ads);
+                 
+     }
+     
+     @Test(dependsOnMethods = "createAds")
+     public void read()
+     {
+         repo = ctx.getBean(AdsRepo.class);
+         Ads ads = repo.findOne(id);
+         Assert.assertEquals(ads.getAdsID(), "1254");
+     }
+     
+     @Test(dependsOnMethods = "read")
+     public void update()
+     {
+         repo = ctx.getBean(AdsRepo.class);
+         Ads ads = repo.findOne(id);
+         
+         Ads updateAds = new Ads.Build("1254").
+                 ads(ads).
+                 startdate("01/06/2014").
+                 build();
+         
+         repo.save(updateAds);
+         Ads newAds = repo.findOne(id);
+         Assert.assertEquals(newAds.getStartdate(), "01/06/2014");
+     }
+     
+     @Test(dependsOnMethods ="update" )
+     public void delete()
+     {
+         repo = ctx.getBean(AdsRepo.class);
+         Ads ads = repo.findOne(id);
+         repo.delete(ads);
+         
+         Ads deletedAds = repo.findOne(id);
+         Assert.assertNull(deletedAds);
                  
      }
 
@@ -66,5 +102,6 @@ public class AdsRepoTest {
 
     @AfterMethod
     public void tearDownMethod() throws Exception {
+        
     }
 }

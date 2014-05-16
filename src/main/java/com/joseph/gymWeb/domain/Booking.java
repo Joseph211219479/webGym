@@ -32,6 +32,7 @@ public class Booking implements Serializable {
     @OneToMany //cascade
     List<Member> member;
     private int avail;
+    private String bookingId;
     
     private Booking (Builder builder)
     {
@@ -50,10 +51,16 @@ public class Booking implements Serializable {
         //private List<Schedule> schedule;
         private Long id;
         private int avail;
+        private String bookingId;
         
-        public Builder(Long bookingId)
+         public Builder(String bookingId)
+        {
+            this.bookingId = bookingId;
+        }
+        public Builder id(Long id)
         {
             this.id = id;
+            return this;
         }
         public Builder avail(int avail)
         {
@@ -65,11 +72,25 @@ public class Booking implements Serializable {
             this.member = member;
             return this;
         }
+        
+        public Builder booking(Booking booking)
+        {
+            member = booking.getMember();
+            id = booking.getId();
+            avail = booking.getAvail();
+            bookingId = booking.getBookingId();
+            
+            return this;
+        }
       
         public Booking builder()
         {
             return new Booking(this);
         }
+    }
+
+    public String getBookingId() {
+        return bookingId;
     }
 
     public Long getId() {
