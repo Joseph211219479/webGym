@@ -84,7 +84,7 @@ public class Contrack implements Serializable{
             return this;
         }
         
-        private Builder contrack(Contrack contrack)
+        public Builder contrack(Contrack contrack)
         {
             this.type = contrack.getType();
             this.duration = contrack.getDuration();

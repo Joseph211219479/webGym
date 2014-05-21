@@ -23,6 +23,7 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    private String proID;
     private String name;
     private int stockAmount;
     private double price;
@@ -30,6 +31,7 @@ public class Product implements Serializable {
     public Product(){}
     private Product(Builder build)
     {
+        this.proID = build.proID;
         this.id = build.id;
         this.name = build.name;
         this.price = build.price;
@@ -38,14 +40,20 @@ public class Product implements Serializable {
     
     public static class Builder
     {
+        private String proID;
         private String name;
         private Long id;
         private int stockAmount;
         private double price;
         
-        public Builder(Long id)
+        public Builder(String proID)
+        {
+            this.proID = proID;
+        }
+        public Builder id(Long id)
         {
             this.id = id;
+            return this;
         }
         public Builder name(String name)
         {
@@ -60,6 +68,16 @@ public class Product implements Serializable {
         public Builder price(double price)
         {
             this.price = price;
+            return this;
+        }
+        public Builder product(Product product)
+        {
+            this.id = product.getId();
+            this.name = product.getName();
+            this.price = product.getPrice();
+            this.stockAmount = product.getStockAmount();
+            this.proID = product.getProID();
+            
             return this;
         }
         public Product build()
@@ -82,6 +100,10 @@ public class Product implements Serializable {
 
     public double getPrice() {
         return price;
+    }
+
+    public String getProID() {
+        return proID;
     }
 
     @Override

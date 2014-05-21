@@ -31,7 +31,7 @@ public class Invoice implements Serializable{
     private String invoiceID;
     private double total;
     @Embedded
-    @OneToMany//(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id")
     List<Product> product;
 
@@ -81,6 +81,15 @@ public class Invoice implements Serializable{
         public Build product(List<Product> product)
         {
             this.product = product;
+            return this;
+        }
+        public Build invoice(Invoice invoice)
+        {
+            this.id = invoice.getId();
+            this.invoiceID = invoice.getInvoiceID();
+            this.product = invoice.getProduct();
+            this.total = invoice.getTotal();
+            
             return this;
         }
         public Invoice build()
