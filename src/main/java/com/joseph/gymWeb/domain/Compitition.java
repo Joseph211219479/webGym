@@ -7,11 +7,15 @@
 package com.joseph.gymWeb.domain;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -29,6 +33,10 @@ public class Compitition implements Serializable {
     private String prize;
     private String compid;
     
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "compitition_id")
+    private List<Member> member;
+    
     private Compitition(){}
     private Compitition(Build build)
     {
@@ -37,8 +45,13 @@ public class Compitition implements Serializable {
         this.name = build.name;
         this.prize = build.prize;
         this.id = build.id;
+        this.member = build.member;
     }
 
+    public List<Member> getMember() {
+        return member;
+    }
+    
     public String getName() {
         return name;
     }
@@ -66,10 +79,16 @@ public class Compitition implements Serializable {
         private String prize;
         private String compid;
         private Long id;
+        private List<Member> member;
     
         public Build(String compid)
         {
             this.compid = compid;
+        }
+        public Build member( List<Member> member)
+        {
+            this.member = member;
+            return this;
         }
         public Build id(Long id)
         {
@@ -98,6 +117,7 @@ public class Compitition implements Serializable {
                 this.prize  = compitition.getPrize();
                 this.compid = compitition.getCompid();
                 this.id     = compitition.getId();
+                this.member = compitition.getMember();
             
             return this;
         }

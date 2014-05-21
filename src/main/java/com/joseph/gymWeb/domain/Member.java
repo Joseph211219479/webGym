@@ -62,6 +62,10 @@ public class Member implements Serializable{
         {
             this.memId = memId;
         }
+
+        public Builder() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
         
                 
         public Builder id(Long id)

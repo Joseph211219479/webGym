@@ -8,6 +8,7 @@ package com.joseph.gymWeb.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,8 +24,11 @@ public class Account implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(unique = true)
     private String accountId;
+    
     private String accountHolder;
+    @Column(nullable = true)
     private double amountDue;
     
     private Account() {

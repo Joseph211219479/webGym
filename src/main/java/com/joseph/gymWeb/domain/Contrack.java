@@ -25,12 +25,13 @@ public class Contrack implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    private String contrackID;
     private String type;
     private String signUp;
     private String endDate;
     private  String duration;
     
-    public Contrack(){}
+    private Contrack(){}
     
     private Contrack(Builder builder)
     {
@@ -39,6 +40,7 @@ public class Contrack implements Serializable{
         type = builder.type;
         endDate = builder.endDate;
         duration = builder.duration;
+        contrackID = builder.contrackID;
     }
     
     public static class Builder
@@ -48,10 +50,16 @@ public class Contrack implements Serializable{
         private  String signUp;
         private  String endDate;
         private  String duration;
+        private String contrackID;
         
-        public Builder(Long val)
+        public Builder(String contrackID)
+        {
+            this.contrackID = contrackID;
+        }
+        public Builder id(Long val)
         {
             this.id = val;
+            return this;
         }
         
         public Builder duration(String val)
@@ -73,6 +81,18 @@ public class Contrack implements Serializable{
         public Builder signUp(String val)
         {
             signUp = val;
+            return this;
+        }
+        
+        private Builder contrack(Contrack contrack)
+        {
+            this.type = contrack.getType();
+            this.duration = contrack.getDuration();
+            this.id = contrack.getId();
+            this.signUp = contrack.getSignUp();
+            this.endDate = contrack.getEndDate();
+            this.contrackID = contrack.contrackID;
+            
             return this;
         }
         
@@ -106,6 +126,10 @@ public class Contrack implements Serializable{
 
     public Long getId() {
         return id;
+    }
+
+    public String getContrackID() {
+        return contrackID;
     }
 
     public String getType() {
