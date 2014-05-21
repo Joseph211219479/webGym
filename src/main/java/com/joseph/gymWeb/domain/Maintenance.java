@@ -54,6 +54,7 @@ public class Maintenance implements Serializable{
     public static class Builder
     {
         private List<Equipment> equipment ;
+        
         private String date;
         private double costs;
         private List<Staff> staff;
@@ -89,6 +90,17 @@ public class Maintenance implements Serializable{
             this.equipment = equipment;
             return this;
         }
+        public Builder maintenence(Maintenance maintenance)
+        {
+            this.buildID = maintenance.getBuildID();
+            this.costs = maintenance.getCosts();
+            this.date = maintenance.getNextDate();
+            this.equipment = maintenance.getEquipment();
+            this.staff = maintenance.getStaff();
+            this.id = maintenance.getId();
+            
+            return this;
+        }
         public Maintenance build()
         {
             return new Maintenance(this);
@@ -112,6 +124,7 @@ public class Maintenance implements Serializable{
         return costs;
     }
 
+    
     public List<Staff> getStaff() {
         return staff;
     }

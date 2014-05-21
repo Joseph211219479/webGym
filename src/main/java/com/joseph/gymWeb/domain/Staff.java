@@ -67,11 +67,7 @@ public class Staff implements Serializable{
                     this.number = number;
                     return this;
                 }
-                public Builder staffId(String staffId)
-                {
-                    this.staffId = staffId;
-                    return this;
-                }
+                
                 public Builder isTrainer(String certified )
                 {
                     if(certified == "yes")
