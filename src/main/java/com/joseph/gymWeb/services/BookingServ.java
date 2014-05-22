@@ -6,15 +6,16 @@
 
 package com.joseph.gymWeb.services;
 
-import com.joseph.gymWeb.domain.Account;
+import com.joseph.gymWeb.domain.Booking;
 import java.util.List;
 
 /**
  *
  * @author Common Sense
  */
-public interface AccountService {
-    public List<Account> acountList(double amount) ;
-    public List<Account> accountLes(double amount);
-    public List<Account> listAll();
+public interface BookingServ {
+    public List<Booking> listAll();
+    //public List<Booking> listDate(String date);
+    public List<Booking> listMembers();
+    
 }

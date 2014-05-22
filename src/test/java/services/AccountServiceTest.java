@@ -55,6 +55,40 @@ public class AccountServiceTest {
          
          
      }
+     @Test
+     public void testLess()
+     {
+         repo = ctx.getBean(AccountRepo.class);
+         service = ctx.getBean(AccountService.class);
+         
+         Account account1 = new Account.Builder("1234").accountHolder("joseph").amountDue(1223.43).build();
+         Account account2 = new Account.Builder("323").accountHolder("kjsgdfg").amountDue(123.43).build();
+         Account account3 = new Account.Builder("873645").accountHolder("kyhtsgg").amountDue(00.00).build();
+         
+         repo.save(account1);
+         repo.save(account2);
+         repo.save(account3);
+         
+         List<Account> account = service.accountLes(1000.00);
+         Assert.assertEquals(account.size(), 2);
+     }
+     @Test
+     public void testAll()
+     {
+         repo = ctx.getBean(AccountRepo.class);
+         service = ctx.getBean(AccountService.class);
+         
+         Account account1 = new Account.Builder("1234").accountHolder("joseph").amountDue(1223.43).build();
+         Account account2 = new Account.Builder("323").accountHolder("kjsgdfg").amountDue(123.43).build();
+         Account account3 = new Account.Builder("873645").accountHolder("kyhtsgg").amountDue(00.00).build();
+         
+         repo.save(account1);
+         repo.save(account2);
+         repo.save(account3);
+         
+         List<Account> account = service.listAll();
+         Assert.assertEquals(account.size(), 3);
+     }
 
     @BeforeClass
     public static void setUpClass() throws Exception {

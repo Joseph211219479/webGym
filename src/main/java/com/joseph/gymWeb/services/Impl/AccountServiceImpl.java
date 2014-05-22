@@ -36,5 +36,28 @@ public class AccountServiceImpl implements AccountService{
                     }
         return list;
     }
+
+    @Override
+    public List<Account> accountLes(double amount) {
+        List<Account> list = new ArrayList();
+        List<Account> all = repo.findAll();
+        for(Account a : all)
+        {
+            if(a.getAmountDue() < amount)
+            {
+                list.add(a);
+            }
+                    }
+        return list;
+    }
+
+    @Override
+    public List<Account> listAll() {
+         //List<Account> list = new ArrayList();
+        List<Account> all = repo.findAll();
+        
+        return all;
+    }
+    
     
 }

@@ -6,15 +6,17 @@
 
 package com.joseph.gymWeb.services;
 
-import com.joseph.gymWeb.domain.Account;
+import com.joseph.gymWeb.domain.Member;
 import java.util.List;
 
 /**
  *
  * @author Common Sense
  */
-public interface AccountService {
-    public List<Account> acountList(double amount) ;
-    public List<Account> accountLes(double amount);
-    public List<Account> listAll();
+public interface MemberServ {
+    public List<Member> memberList();
+    public Member searchByID(String memID);
+    public List<Member> searchByFullname(String lastname, String firstname);
+    
+    
 }

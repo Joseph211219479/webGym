@@ -28,7 +28,7 @@ public class Payroll implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     
-     private int pId;
+     private String pId;
     private double amount;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "payroll_id")
@@ -47,14 +47,15 @@ public class Payroll implements Serializable {
     
     public static class Builder
     {
-        private int pId;
+        private String pId;
         private double amount;
         private Staff staff;
         private Long id;
         
-        public Builder( double amount )
+        public Builder amount( double amount )
         {
             this.amount = amount;
+            return this;
         }
         public Builder id(Long id)
         {
@@ -62,10 +63,9 @@ public class Payroll implements Serializable {
             return this;
         }
         
-        public Builder staffId( int value )
+        public Builder ( String pId )
         {
-            pId = value;
-            return this;
+            this.pId = pId;
         }
         
         public Builder staff( Staff staff )
@@ -90,7 +90,7 @@ public class Payroll implements Serializable {
         }
     }
 
-    public int getStaffId() {
+    public String getStaffId() {
         return pId;
     }
 

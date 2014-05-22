@@ -6,10 +6,10 @@
 
 package com.joseph.gymWeb.services.Impl;
 
-import com.joseph.gymWeb.domain.Ads;
-import com.joseph.gymWeb.domain.Supplier;
-import com.joseph.gymWeb.repository.AdsRepo;
-import com.joseph.gymWeb.services.AdsService;
+import com.joseph.gymWeb.domain.Booking;
+import com.joseph.gymWeb.domain.Member;
+import com.joseph.gymWeb.repository.BookingRepo;
+import com.joseph.gymWeb.services.BookingServ;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,24 +20,25 @@ import org.springframework.stereotype.Service;
  * @author Common Sense
  */
 @Service
-public class AdsServiceImpl implements AdsService{
+public class BookingServImpl implements BookingServ{
     @Autowired
-    private AdsRepo repo;
+    private BookingRepo repo;
     @Override
-    public List<Ads> listall() {
-        List<Ads> ads = repo.findAll();
-        List<Ads> list = new ArrayList();
-        for(Ads a : ads)
+    public List<Booking> listAll() 
+    {
+        List<Booking> bookings = repo.findAll();
+        List<Booking> all = new ArrayList();
+        for(Booking a : bookings)
         {
-            list.add(a);
+            all.add(a);
         }
-        
-        return list;
+        return bookings;
     }
 
     @Override
-    public List<Ads> supplierssAds(Supplier supplier) {
+    public List<Booking> listMembers() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
     
 }
