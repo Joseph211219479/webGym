@@ -8,6 +8,7 @@ package com.joseph.gymWeb.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,10 +26,12 @@ public class Staff implements Serializable{
     private Long id;
     
      private String name;
+     @Column(nullable = true)
     private String number;
     private String staffId;
     //Maintenance string maintenace ;
-    private boolean isTrainer;
+    @Column(nullable = true)
+    private String isTrainer;
     
     private Staff(){}
     private Staff(Builder build)
@@ -45,7 +48,7 @@ public class Staff implements Serializable{
                 private String number;
                 private String staffId;
                 //Maintenance string maintenace ;
-                private boolean isTrainer;
+                private String isTrainer;
                 private Long id;
                 
                 public Builder(String staffId)
@@ -70,15 +73,19 @@ public class Staff implements Serializable{
                 
                 public Builder isTrainer(String certified )
                 {
-                    if(certified == "yes")
-                    {
-                        this.isTrainer = true;
-                    }
-                    else 
-                        this.isTrainer = false;
+                    this.isTrainer = certified;
                     return this;
                 }
-                
+                public Builder staff(Staff staff)
+                {
+                    this.id = staff.getId();
+                    this.isTrainer = staff.isIsTrainer();
+                    this.name = staff.getName();
+                    this.staffId = staff.getStaffId();
+                    this.number = staff.getNumber();
+                    
+                    return this;
+                }
                 public Staff builder()
                 {
                     return new Staff(this);
@@ -101,7 +108,7 @@ public class Staff implements Serializable{
         return staffId;
     }
 
-    public boolean isIsTrainer() {
+    public String isIsTrainer() {
         return isTrainer;
     }
 

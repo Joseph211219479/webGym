@@ -51,6 +51,8 @@ public class MaintenanceRepoTest {
                  number("027983735").
                  builder();
          staffList.add(s1);
+         Assert.assertEquals(s1.getName(), "piet");
+         
          Equipment q1 = new Equipment.Builder("sdfe23").
                  name("Joseph").
                  buyDate("22/05/2014").
